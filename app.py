@@ -32,40 +32,32 @@ def init_db():
 init_db()
 
 def send_email(name, email, message):
-    print("EMAIL:", os.getenv("EMAIL_ADDRESS"))
-    print("PASSWORD:", os.getenv("EMAIL_PASSWORD"))
-    try:
-        sender = os.getenv("EMAIL")
-        password = os.getenv("PASSWORD")
 
-        receiver = sender
+    sender = os.getenv("EMAIL")
+    password = os.getenv("PASSWORD")
 
-        msg = MIMEMultipart()
-        msg["From"] = sender
-        msg["To"] = receiver
-        msg["Subject"] = "New Portfolio Message"
+    print("Sender:", sender)
 
-        body = f"""
+    msg = MIMEMultipart()
+    msg["From"] = sender
+    msg["To"] = sender
+    msg["Subject"] = "New Portfolio Contact"
+
+    body = f"""
 Name: {name}
 Email: {email}
 Message: {message}
 """
 
-        msg.attach(MIMEText(body, "plain"))
+    msg.attach(MIMEText(body, "plain"))
 
-        print("Sender:", sender)
-        print("Password loaded:", bool(password))
+    server = smtplib.SMTP("smtp.gmail.com", 587)
+    server.starttls()
+    server.login(sender, password)
+    server.sendmail(sender, sender, msg.as_string())
+    server.quit()
 
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender, password)
-        server.sendmail(sender, receiver, msg.as_string())
-        server.quit()
-
-        print("Email sent successfully")
-
-    except Exception as e:
-        print("EMAIL ERROR:", e)
+    print("Email sent")
     # HTML Email content
     html_content = f"""
     <html>
@@ -106,12 +98,30 @@ def home():
     return render_template("index.html")
 @app.route("/contact", methods=["POST"])
 def contact():
-    data = request.json
-    name = data.get("name")
-    email = data.get("email")
-    message = data.get("message")
+    try:
+        data = request.json
+        name = data["name"]
+        email = data["email"]
+        message = data["message"]
 
-    return jsonify({"message": "Message received successfully"})
+        conn = sqlite3.connect("messages.db")
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "INSERT INTO messages(name,email,message) VALUES (?,?,?)",
+            (name,email,message)
+        )
+
+        conn.commit()
+        conn.close()
+
+        send_email(name, email, message)
+
+        return jsonify({"message":"Message received successfully"})
+
+    except Exception as e:
+        print("CONTACT ERROR:", e)
+        return jsonify({"message":"Error sending message"}), 500
     
     # Save to DB
     conn = sqlite3.connect("messages.db")
