@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 
 load_dotenv()  # load variables from .env
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Create database
 def init_db():
@@ -159,4 +159,4 @@ def delete_message(id):
 # IMPORTANT: run the server
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=port, debug=True)
