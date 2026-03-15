@@ -32,6 +32,8 @@ def init_db():
 init_db()
 
 def send_email(name, email, message):
+    print("EMAIL:", os.getenv("EMAIL_ADDRESS"))
+    print("PASSWORD:", os.getenv("EMAIL_PASSWORD"))
     try:
         sender = os.getenv("EMAIL")
         password = os.getenv("PASSWORD")
