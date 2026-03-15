@@ -58,7 +58,6 @@ function toggleMenu(){
 
 // CONTACT FORM SUBMISSION
 document.getElementById("contactForm").addEventListener("submit", async function(e){
-
     e.preventDefault();
 
     const name = document.getElementById("name").value;
@@ -81,15 +80,16 @@ document.getElementById("contactForm").addEventListener("submit", async function
 
         const data = await response.json();
 
-        alert(data.message);
+        if(response.ok){
+            alert(data.message);
+        } else {
+            alert("Server error: " + data.message);
+        }
 
-        this.reset();
+        document.getElementById("contactForm").reset();
 
     } catch(error) {
-
-        console.error("Fetch Error:", error);
-        alert("Error sending message. Backend might not be running.");
-
+        console.error("Fetch error:", error);
+        alert("Network error. Please try again.");
     }
-
 });
