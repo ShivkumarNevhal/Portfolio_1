@@ -58,24 +58,38 @@ function toggleMenu(){
 
 // CONTACT FORM SUBMISSION
 document.getElementById("contactForm").addEventListener("submit", async function(e){
-    e.preventDefault();  // Prevent page reload
 
-    const name = this.name.value;
-    const email = this.email.value;
-    const message = this.message.value;
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
 
     try {
+
         const response = await fetch("/contact", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message })
-             });
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                message: message
+            })
+        });
 
         const data = await response.json();
-        alert(data.message); // Message stored and email sent
-        this.reset(); // clear form
-    } catch (err) {
+
+        alert(data.message);
+
+        this.reset();
+
+    } catch(error) {
+
+        console.error("Fetch Error:", error);
         alert("Error sending message. Backend might not be running.");
-        console.error(err);
+
     }
+
 });
