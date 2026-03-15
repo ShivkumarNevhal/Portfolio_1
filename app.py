@@ -31,18 +31,39 @@ def init_db():
 
 init_db()
 
-
 def send_email(name, email, message):
-    sender = os.getenv("EMAIL")
-    password = os.getenv("PASSWORD")
-    receiver = sender  # send to yourself
+    try:
+        sender = os.getenv("EMAIL")
+        password = os.getenv("PASSWORD")
 
-    # Create the email
-    msg = MIMEMultipart("alternative")
-    msg["Subject"] = "📨 New Portfolio Contact Message"
-    msg["From"] = sender
-    msg["To"] = receiver
+        receiver = sender
 
+        msg = MIMEMultipart()
+        msg["From"] = sender
+        msg["To"] = receiver
+        msg["Subject"] = "New Portfolio Message"
+
+        body = f"""
+Name: {name}
+Email: {email}
+Message: {message}
+"""
+
+        msg.attach(MIMEText(body, "plain"))
+
+        print("Sender:", sender)
+        print("Password loaded:", bool(password))
+
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender, password)
+        server.sendmail(sender, receiver, msg.as_string())
+        server.quit()
+
+        print("Email sent successfully")
+
+    except Exception as e:
+        print("EMAIL ERROR:", e)
     # HTML Email content
     html_content = f"""
     <html>
