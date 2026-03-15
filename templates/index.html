@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <title>Shivkumar Portfolio</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- PARTICLES BACKGROUND -->
+    <div id="particles-js"></div>
+
+    <!-- HEADER / NAVBAR -->
+    <header>
+      <div class="logo">Shiva</div>
+
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+      <nav id="nav-menu">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+      <div class="hero-text">
+        <h1>Hello, I'm <span>Shivkumar</span></h1>
+        <h2><span id="typing"></span></h2>
+        <p>
+          Data Scientist passionate about Machine Learning, AI, and solving
+          real-world problems using data.
+        </p>
+
+        <div class="hero-buttons">
+          <button onclick="scrollToSection('contact')">Hire Me</button>
+          <a href="{{ url_for('static', filename='./Shivkumar_Nevhal_AIML.pdf') }}" download class="secondary">
+            Download CV
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="{{ url_for('static', filename='./img/portfolio.png') }}" alt="Portfolio Image" />
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-container">
+        <div class="about-text">
+          <p>
+            I am Shivkumar Nevhal, an aspiring Data Scientist with strong
+            knowledge of Python, SQL, Machine Learning and Deep Learning. I
+            enjoy building intelligent AI systems and solving complex real-world
+            problems through data.
+          </p>
+          <p>
+            I have developed projects including AI Chatbots, Vehicle
+            Authentication Systems, and Machine Learning models.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="skill">Python</div>
+        <div class="skill">SQL</div>
+        <div class="skill">Machine Learning</div>
+        <div class="skill">Deep Learning</div>
+        <div class="skill">Data Analysis</div>
+        <div class="skill">Power BI</div>
+        <div class="skill">Pandas</div>
+        <div class="skill">NumPy</div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="projects-grid">
+        <div class="project">
+          <h3>AI Voice Assistant</h3>
+          <p>
+            AI-powered assistant that helps customers with product-related
+            queries, including product tracking, returns, and exchanges.
+          </p>
+          <p class="project-note">Note: This project is currently under development.</p>
+          <div class="project-links">
+            <span class="btn-link disabled">Work In Progress</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <h3>Water Potability Prediction</h3>
+          <p>
+            Built a complete ML pipeline to predict water safety using
+            physicochemical features. Handled data cleaning, preprocessing,
+            scaling, and class imbalance. Developed and compared Logistic
+            Regression, KNN, Decision Tree, and Random Forest models. Final
+            model achieved ~69% accuracy.
+          </p>
+        </div>
+
+        <div class="project">
+          <h3>Healthcare Stroke Risk Prediction (ANN)</h3>
+          <p>
+            Developed and deployed an end-to-end Deep Learning solution using an
+            Artificial Neural Network to predict stroke risk from healthcare and
+            lifestyle data. Implemented preprocessing for mixed features,
+            probability-based predictions, and a real-time interactive web app.
+            Analyzed patient attributes like age, glucose level, BMI,
+            hypertension, heart disease, and smoking status.
+          </p>
+          <p>
+            <strong>Live Application:</strong>
+            <a
+              href="https://annhealthcare-9xegh9faeirddnnqkaeqmk.streamlit.app/"
+              target="_blank"
+            >View App</a>
+          </p>
+          <p>
+            <strong>Source Code:</strong>
+            <a
+              href="https://github.com/ShivkumarNevhal/ANN_Healthcare"
+              target="_blank"
+            >GitHub Repository</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <form id="contactForm" class="contact-form">
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="email" id="email" placeholder="Your Email" required />
+        <textarea id="message" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2026 Shivkumar Nevhal | Data Scientist</p>
+    </footer>
+
+    <!-- Example extra image -->
+    <img src="{{ url_for('static', filename='./img/portfolio.png') }}" alt="Portfolio Image">
+
+    <!-- JS -->
+    <script src="{{ url_for('static', filename='/js/scripts.js') }}"></script>
+  </body>
+</html>
