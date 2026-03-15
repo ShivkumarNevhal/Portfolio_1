@@ -100,28 +100,18 @@ def home():
 def contact():
     try:
         data = request.json
-        name = data["name"]
-        email = data["email"]
-        message = data["message"]
 
-        conn = sqlite3.connect("messages.db")
-        cursor = conn.cursor()
-
-        cursor.execute(
-            "INSERT INTO messages(name,email,message) VALUES (?,?,?)",
-            (name,email,message)
-        )
-
-        conn.commit()
-        conn.close()
+        name = data.get("name")
+        email = data.get("email")
+        message = data.get("message")
 
         send_email(name, email, message)
 
-        return jsonify({"message":"Message received successfully"})
+        return jsonify({"message": "Message sent successfully"}), 200
 
     except Exception as e:
-        print("CONTACT ERROR:", e)
-        return jsonify({"message":"Error sending message"}), 500
+        print("ERROR:", e)
+        return jsonify({"message": "Server error"}), 500
     
     # Save to DB
     conn = sqlite3.connect("messages.db")
