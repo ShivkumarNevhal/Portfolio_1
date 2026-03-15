@@ -88,6 +88,8 @@ def contact():
     email = data.get("email")
     message = data.get("message")
 
+    return jsonify({"message": "Message received successfully"})
+    
     # Save to DB
     conn = sqlite3.connect("messages.db")
     cursor = conn.cursor()
@@ -158,5 +160,6 @@ def delete_message(id):
     return jsonify({"message":"Deleted"})
 # IMPORTANT: run the server
 if __name__ == "__main__":
+    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
