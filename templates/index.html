@@ -7,7 +7,7 @@
     <title>Shivkumar Portfolio</title>
     
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='.//css/style.css') }}">
 
     <!-- Google Fonts -->
     <link
@@ -47,14 +47,14 @@
 
         <div class="hero-buttons">
           <button onclick="scrollToSection('contact')">Hire Me</button>
-          <a href="{{ url_for('static', filename='./Shivkumar_Nevhal_AIML.pdf') }}" download class="secondary">
+          <a href="{{ url_for('static', filename='.//Shivkumar_Nevhal_AIML.pdf') }}" download class="secondary">
             Download CV
           </a>
         </div>
       </div>
 
       <div class="hero-image">
-        <img src="{{ url_for('static', filename='./img/portfolio.png') }}" alt="Portfolio Image" />
+        <img src="{{ url_for('static', filename='.//img/portfolio.png') }}" alt="Portfolio Image" />
       </div>
     </section>
 
@@ -164,9 +164,9 @@
     </footer>
 
     <!-- Example extra image -->
-    <img src="{{ url_for('static', filename='./img/portfolio.png') }}" alt="Portfolio Image">
+    <img src="{{ url_for('static', filename='.//img/portfolio.png') }}" alt="Portfolio Image">
 
     <!-- JS -->
-    <script src="{{ url_for('static', filename='/js/scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='//js/scripts.js') }}"></script>
   </body>
 </html>
